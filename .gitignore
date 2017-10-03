@@ -102,3 +102,6 @@ ENV/
 
 # SonarQube files
 .scannerwork/
+
+# Pycharm Files
+.idea/
