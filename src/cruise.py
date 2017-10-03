@@ -13,7 +13,11 @@ URL = "https://cruises.affordabletours.com/search/advanced_search"
 def main():
     r = requests.get(URL, params=PARAMS)
     soup = BeautifulSoup(r.text, "html.parser")
-    print(soup)
+    results = soup.find("table", {"class": "search-results"})
+    blas = results.findAll("tr")
+    for bla in blas:
+        print(bla)
+        print("-----")
 
 if __name__ == "__main__":
     main()
