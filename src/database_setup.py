@@ -15,6 +15,11 @@ class Ship(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(128), nullable=False)
 
+class Port(Base):
+    __tablename__ = "port"
+    id = Column(Integer, primary_key=True)
+    name = Column(String(256), nullable=False)
+
 class Curise(Base):
     __tablename__ = 'curise'
     id = Column(Integer, primary_key=True)
@@ -24,8 +29,8 @@ class Curise(Base):
     ship_id = Column(Integer, ForeignKey('ship.id'))
     ship = relationship(Ship)
     destination = Column(String(256))
-    #This should probably be it own table
-    departs = Column(String(256))
+    departs_id = Column(Integer, ForeignKey('port.id'))
+    departs = relationship(Port)
     nights = Column(Integer)
     price = Column(Integer)
 
