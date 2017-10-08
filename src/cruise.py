@@ -26,11 +26,25 @@ def add_to_db(cruise_data):
     #Check to see if a curise line exists
     if not session.query(exists().where(CruiseLine.name == cruise_data[1])).scalar():
         add_cruiseline(cruise_data[1])
-        print("Adding %s to database" % cruise_data[1])
+        print("Adding CruiseLine %s to database" % cruise_data[1])
+    if not session.query(exists().where(Ship.name == cruise_data[2])).scalar():
+        add_ship(cruise_data[2])
+        print("Adding Ship %s to database" % cruise_data[2])
+    if not session.query(exists().where(Port.name == cruise_data[4])).scalar():
+        add_port(cruise_data[4])
+        print("Adding Port %s to database" % cruise_data[4])
 
 def add_cruiseline(cruise_line):
-    new_cruiseline = CruiseLine(name = cruise_line)
-    session.add(new_cruiseline)
+    commit(CruiseLine(name = cruise_line))
+
+def add_ship(ship):
+    commit(Ship(name = ship))
+
+def add_port(port):
+    commit(Port(name = port))
+
+def commit(query):
+    session.add(query)
     session.commit()
 
 def get_cruise_data(cruise):
