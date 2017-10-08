@@ -3,7 +3,7 @@ import requests
 
 from sqlalchemy import create_engine, exists
 from sqlalchemy.orm import sessionmaker
-from database_setup import Base, CruiseLine, Ship, Port, Curise
+from database_setup import Base, CruiseLine, Ship, Port, Cruise
 
 engine = create_engine('sqlite:///db.db')
 Base.metadata.bind = engine
@@ -23,7 +23,7 @@ def main():
         add_to_db(cruise_data)
 
 def add_to_db(cruise_data):
-    #Check to see if a curise line exists
+    #Check to see if a cruise line exists
     if not session.query(exists().where(CruiseLine.name == cruise_data[1])).scalar():
         add_cruiseline(cruise_data[1])
         print("Adding CruiseLine %s to database" % cruise_data[1])
@@ -33,6 +33,8 @@ def add_to_db(cruise_data):
     if not session.query(exists().where(Port.name == cruise_data[4])).scalar():
         add_port(cruise_data[4])
         print("Adding Port %s to database" % cruise_data[4])
+    if not session.query(exists().where(Cruise.ship.name == cruise_data[2] and Cruise.date == cruise_data[0])):
+        print("HI")
 
 def add_cruiseline(cruise_line):
     commit(CruiseLine(name = cruise_line))

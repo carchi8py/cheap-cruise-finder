@@ -20,7 +20,7 @@ class Port(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(256), nullable=False)
 
-class Curise(Base):
+class Cruise(Base):
     __tablename__ = 'curise'
     id = Column(Integer, primary_key=True)
     date = Column(Date, nullable=False)
