@@ -17,11 +17,14 @@ PARAMS = {"destination": DESTINATION}
 URL = "https://cruises.affordabletours.com/search/advanced_search"
 
 def main():
-    cruises = find_search_results()
-    # the first cruise row is the header of the table, which we don't care about so we will skip them
-    for cruise in cruises[1:]:
-        cruise_data = get_cruise_data(cruise)
-        add_to_db(cruise_data)
+    i = 1
+    while i < 10:
+        cruises = find_search_results(i)
+        # the first cruise row is the header of the table, which we don't care about so we will skip them
+        for cruise in cruises[1:]:
+            cruise_data = get_cruise_data(cruise)
+            add_to_db(cruise_data)
+        i+=1
 
 def add_to_db(cruise_data):
     #Check to see if a cruise line exists
@@ -77,8 +80,10 @@ def get_cruise_data(cruise):
     price = cruise.find("td", {"class": "table-price"}).text
     return [date, line, ship, destination, departs, nights, price]
 
-def find_search_results():
+def find_search_results(page = 1):
+    PARAMS["Page"] = page
     r = requests.get(URL, params=PARAMS)
+    print(r.url)
     soup = BeautifulSoup(r.text, "html.parser")
     results = soup.find("table", {"class": "search-results"})
     return results.findAll("tr")
