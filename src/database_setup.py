@@ -21,7 +21,7 @@ class Port(Base):
     name = Column(String(256), nullable=False)
 
 class Cruise(Base):
-    __tablename__ = 'curise'
+    __tablename__ = 'cruise'
     id = Column(Integer, primary_key=True)
     date = Column(Date, nullable=False)
     line_id = Column(Integer, ForeignKey('cruiseline.id'))
