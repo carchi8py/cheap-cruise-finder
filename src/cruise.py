@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
+import datetime
 
 from sqlalchemy import create_engine, exists
 from sqlalchemy.orm import sessionmaker
@@ -33,8 +34,12 @@ def add_to_db(cruise_data):
     if not session.query(exists().where(Port.name == cruise_data[4])).scalar():
         add_port(cruise_data[4])
         print("Adding Port %s to database" % cruise_data[4])
-    if not session.query(exists().where(Cruise.ship.name == cruise_data[2] and Cruise.date == cruise_data[0])):
-        print("HI")
+    date_obj = datetime.datetime.strptime(cruise_data[0], "%b %d, %Y").date()
+    if not session.query(exists().where(Cruise.date == date_obj and \
+                                        Cruise.nights == cruise_data[5] and \
+                                        Cruise.destination == cruise_data[3])).scalar():
+        add_cruise(cruise_data, date_obj)
+        print("Adding cruise %s to database" % str(cruise_data))
 
 def add_cruiseline(cruise_line):
     commit(CruiseLine(name = cruise_line))
@@ -44,6 +49,19 @@ def add_ship(ship):
 
 def add_port(port):
     commit(Port(name = port))
+
+def add_cruise(cruise_data, date_obj):
+    line_obj = session.query(CruiseLine).filter_by(name = cruise_data[1]).one()
+    ship_obj = session.query(Ship).filter_by(name = cruise_data[2]).one()
+    port_obj = session.query(Port).filter_by(name = cruise_data[4]).one()
+    new_curise = Cruise(date = date_obj,
+                        line = line_obj,
+                        ship = ship_obj,
+                        destination = cruise_data[3],
+                        departs = port_obj,
+                        nights = cruise_data[5],
+                        price = cruise_data[6])
+    commit(new_curise)
 
 def commit(query):
     session.add(query)
