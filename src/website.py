@@ -16,19 +16,28 @@ session = DBSession()
 
 @app.route('/')
 def index():
-    # TODO: Show a page that show the different pages we've made
+    #TODO: Show a page that show the different pages we've made
+    return
 
-def curiseLines('/lines/'):
-    #TODO: show all cruise lines alphabeticly
+@app.route('/lines/')
+def curiseLines():
+    lines = session.query(CruiseLine).order_by(CruiseLine.name)
+    return render_template('lines.html', lines=lines)
 
-def ships('/ships/'):
+@app.route('/ships/')
+def ships():
     #TODO: Show all curise ships
+    return
 
-def ports('/ports/'):
+@app.route('/ports/')
+def ports():
     #TODO: Show all Ports
+    return
 
-def cruiseByPricePreDay('/curises/'):
+@app.route('/curises/')
+def cruiseByPricePreDay():
     #TODO Show all curises by cheapest price pre day
+    return
 
 
 if __name__ == '__main__':
