@@ -26,8 +26,8 @@ def curiseLines():
 
 @app.route('/ships/')
 def ships():
-    #TODO: Show all curise ships
-    return
+    ships = session.query(Ship).order_by(Ship.name)
+    return render_template('ship.html', ships=ships)
 
 @app.route('/ports/')
 def ports():
