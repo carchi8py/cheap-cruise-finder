@@ -36,7 +36,7 @@ def ports():
 
 @app.route('/curises/')
 def cruiseByPricePreDay():
-    #TODO Show all curises by cheapest price pre day
+    cruises = session.query(Curise).order_by(Curise.price/Curise.nights)
     return
 
 
