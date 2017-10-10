@@ -3,7 +3,7 @@ import sqlalchemy
 from sqlalchemy.sql.expression import func
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from database_setup import Base, CruiseLine, Ship, Port, Curise
+from database_setup import Base, CruiseLine, Ship, Port, Cruise
 import sys
 
 app = Flask(__name__)
@@ -34,10 +34,10 @@ def ports():
     ships = session.query(Port).order_by(Port.name)
     return render_template('ship.html', ships=ships)
 
-@app.route('/curises/')
+@app.route('/cruises/')
 def cruiseByPricePreDay():
-    cruises = session.query(Curise).order_by(Curise.price/Curise.nights)
-    return
+    cruises = session.query(Cruise).order_by(Cruise.price/Cruise.nights)
+    return render_template('cruise.html', cruises=cruises)
 
 
 if __name__ == '__main__':

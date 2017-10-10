@@ -1,0 +1,17 @@
+<html>
+<body>
+<table border="1">
+    <tr><th>Test</th></tr>
+    {% for cruise in cruises %}
+        <tr>
+            <td>{{cruise.date}}</td>
+            <td>{{cruise.line.name}}</td>
+            <td>{{cruise.ship.name}}</td>
+            <td>{{cruise.departs.name}}</td>
+            <td>{{cruise.price}}</td>
+            <td>{{cruise.nights}}</td>
+        </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
