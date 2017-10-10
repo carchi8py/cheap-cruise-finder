@@ -1,6 +1,8 @@
 from bs4 import BeautifulSoup
 import requests
 import datetime
+from re import sub
+from decimal import Decimal
 
 from sqlalchemy import create_engine, exists
 from sqlalchemy.orm import sessionmaker
@@ -57,13 +59,14 @@ def add_cruise(cruise_data, date_obj):
     line_obj = session.query(CruiseLine).filter_by(name = cruise_data[1]).one()
     ship_obj = session.query(Ship).filter_by(name = cruise_data[2]).one()
     port_obj = session.query(Port).filter_by(name = cruise_data[4]).one()
+    money_int = int(sub(r'[^\d.]', '', cruise_data[6]))
     new_curise = Cruise(date = date_obj,
                         line = line_obj,
                         ship = ship_obj,
                         destination = cruise_data[3],
                         departs = port_obj,
                         nights = cruise_data[5],
-                        price = cruise_data[6])
+                        price = money_int)
     commit(new_curise)
 
 def commit(query):
