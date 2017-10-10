@@ -31,8 +31,8 @@ def ships():
 
 @app.route('/ports/')
 def ports():
-    #TODO: Show all Ports
-    return
+    ships = session.query(Port).order_by(Port.name)
+    return render_template('ship.html', ships=ships)
 
 @app.route('/curises/')
 def cruiseByPricePreDay():
