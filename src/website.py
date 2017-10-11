@@ -20,7 +20,7 @@ def index():
     return
 
 @app.route('/lines/')
-def curiseLines():
+def curise_lines():
     lines = session.query(CruiseLine).order_by(CruiseLine.name)
     return render_template('lines.html', lines=lines)
 
@@ -35,7 +35,7 @@ def ports():
     return render_template('ship.html', ships=ships)
 
 @app.route('/cruises/')
-def cruiseByPricePreDay():
+def cruise_by_price_pre_day():
     cruises = session.query(Cruise).order_by(Cruise.price/Cruise.nights)
     return render_template('cruise.html', cruises=cruises)
 
