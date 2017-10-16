@@ -1,10 +1,7 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
-import sqlalchemy
-from sqlalchemy.sql.expression import func
+from flask import Flask, render_template
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, CruiseLine, Ship, Port, Cruise
-import sys
 
 app = Flask(__name__)
 
