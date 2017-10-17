@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 import datetime
 from re import sub
+import time
 from decimal import Decimal
 
 from sqlalchemy import create_engine, exists
@@ -46,6 +47,17 @@ def add_to_db(cruise_data):
         add_cruise(cruise_data, date_obj)
         print("Adding cruise %s to database" % str(cruise_data))
 
+def remove_from_db(cruise_data):
+    db_delete(session.query(Cruise).filter_by(nights = cruise_data[5]).first())
+    print("Removing Cruise")
+    db_delete(session.query(Port).filter_by(name = cruise_data[4]).first())
+    print("Removing Port")
+    db_delete(session.query(Ship).filter_by(name=cruise_data[2]).first())
+    print("Removing Ship")
+    db_delete(session.query(CruiseLine).filter_by(name=cruise_data[1]).first())
+    print("Removing CruiseLine")
+
+
 def add_cruiseline(cruise_line):
     commit(CruiseLine(name = cruise_line))
 
@@ -71,6 +83,10 @@ def add_cruise(cruise_data, date_obj):
 
 def commit(query):
     session.add(query)
+    session.commit()
+
+def db_delete(query):
+    session.delete(query)
     session.commit()
 
 def get_cruise_data(cruise):
