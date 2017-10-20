@@ -20,9 +20,14 @@ PARAMS = {"destination": DESTINATION}
 URL = "https://cruises.affordabletours.com/search/advanced_search"
 
 def main():
+    works = True
     i = 1
-    while i < 10:
-        cruises = find_search_results(i)
+    while works:
+        try:
+            cruises = find_search_results(i)
+        except:
+            works = False
+            continue
         # the first cruise row is the header of the table, which we don't care about so we will skip them
         for cruise in cruises[1:]:
             cruise_data = get_cruise_data(cruise)
