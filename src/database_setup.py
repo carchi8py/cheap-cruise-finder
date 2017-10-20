@@ -43,6 +43,7 @@ class Day(Base):
     id = Column(Integer, primary_key=True)
     cruise_id = Column(Integer, ForeignKey('cruise.id'))
     cruise = relationship("Cruise", back_populates="days")
+    day = Column(Integer)
     date = Column(Date)
     port_id = Column(Integer, ForeignKey('port.id'))
     port = relationship(Port)

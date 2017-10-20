@@ -33,7 +33,7 @@ def main():
                 cruise_data = get_cruise_data(cruise)
                 add_to_db(cruise_data)
                 itinerary = get_crusie_info(cruise_data)
-                print(itinerary)
+                parse_days(itinerary)
                 sys.exit(1)
             i+=1
 
@@ -162,6 +162,19 @@ def get_cruise_data(cruise):
     nights = cruise.find("td", {"class": "table-nights"}).text
     price = cruise.find("td", {"class": "table-price"}).text
     return [date, line, ship, destination, departs, nights, price, id]
+
+def parse_days(itinerary):
+    i = 1
+    for each in itinerary[1:]:
+        days = each.findAll("td")
+        date = days[0].text.split(":")[1]
+        port = days[1].text.split(":")[1]
+        arriavl = days[2].text.split(":",1)[1]
+        departure = days[3].text.split(":",1)[1]
+        print(date)
+        print(port)
+        print(arriavl)
+        print(departure)
 
 def find_search_results(page, params):
     """
