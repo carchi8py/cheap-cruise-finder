@@ -33,7 +33,7 @@ class Cruise(Base):
     departs = relationship(Port)
     nights = Column(Integer)
     price = Column(Integer)
-    days = relationship("Day", back_populates="parent")
+    days = relationship("Day", back_populates="cruise")
 
 class Day(Base):
     """

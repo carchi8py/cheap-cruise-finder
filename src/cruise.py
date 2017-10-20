@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 import datetime
 from re import sub
+import sys
 
 from sqlalchemy import create_engine, exists
 from sqlalchemy.orm import sessionmaker
@@ -14,6 +15,7 @@ session = DBSession()
 
 DESTINATIONS = ["21", "10", "2"]
 URL = "https://cruises.affordabletours.com/search/advanced_search"
+INFO_URL = "https://cruises.affordabletours.com/search/itsd/cruises/"
 
 def main():
     for destination in DESTINATIONS:
@@ -30,6 +32,9 @@ def main():
             for cruise in cruises[1:]:
                 cruise_data = get_cruise_data(cruise)
                 add_to_db(cruise_data)
+                itinerary = get_crusie_info(cruise_data)
+                print(itinerary)
+                sys.exit(1)
             i+=1
 
 def add_to_db(cruise_data):
@@ -172,6 +177,15 @@ def find_search_results(page, params):
     soup = BeautifulSoup(r.text, "html.parser")
     results = soup.find("table", {"class": "search-results"})
     return results.findAll("tr")
+
+def get_crusie_info(data):
+    id = data[7]
+    r = requests.get(INFO_URL + str(id))
+    print(r.url)
+    soup = BeautifulSoup(r.text, "html.parser")
+    results = soup.find("table", {"id": "maintable"})
+    return results.findAll("tr")
+
 
 if __name__ == "__main__":
     main()
