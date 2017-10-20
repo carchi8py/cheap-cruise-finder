@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>cruise module &#8212; Cheap Cruise Finder 0.1 documentation</title>
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -24,16 +24,27 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="database_setup module" href="database_setup.html" />
-    <link rel="prev" title="src" href="index.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
+    <link rel="prev" title="src" href="index.html" /> 
   </head>
   <body>
-  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="database_setup.html" title="database_setup module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="src"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Cheap Cruise Finder 0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
@@ -50,42 +61,130 @@
 <dl class="function">
 <dt id="cruise.add_cruiseline">
 <code class="descclassname">cruise.</code><code class="descname">add_cruiseline</code><span class="sig-paren">(</span><em>cruise_line</em><span class="sig-paren">)</span><a class="headerlink" href="#cruise.add_cruiseline" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>commit a cruise Line to the cruise line table in the database</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cruise_line</strong> – The name of the Cruise line</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">nothing</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="cruise.add_port">
 <code class="descclassname">cruise.</code><code class="descname">add_port</code><span class="sig-paren">(</span><em>port</em><span class="sig-paren">)</span><a class="headerlink" href="#cruise.add_port" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Commis a Port to the Port table in the database</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>port</strong> – The name of the Port</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">nothing</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="cruise.add_ship">
 <code class="descclassname">cruise.</code><code class="descname">add_ship</code><span class="sig-paren">(</span><em>ship</em><span class="sig-paren">)</span><a class="headerlink" href="#cruise.add_ship" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Commit a cruise ship to the cruise ship table in the database</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ship</strong> – the name of the cruise ship</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">nothing</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="cruise.add_to_db">
 <code class="descclassname">cruise.</code><code class="descname">add_to_db</code><span class="sig-paren">(</span><em>cruise_data</em><span class="sig-paren">)</span><a class="headerlink" href="#cruise.add_to_db" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Add a specific cruise to our database</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cruise_data</strong> – Should be a list in the following order [date, curise line, Cruise ship, The Destination, the departure port, how many night, the price in USD]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">nothing</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="cruise.commit">
 <code class="descclassname">cruise.</code><code class="descname">commit</code><span class="sig-paren">(</span><em>query</em><span class="sig-paren">)</span><a class="headerlink" href="#cruise.commit" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Runs a commit to add data to the database</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>query</strong> – the sqlalchemy add statement we want to run</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">nothing</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="cruise.db_delete">
 <code class="descclassname">cruise.</code><code class="descname">db_delete</code><span class="sig-paren">(</span><em>query</em><span class="sig-paren">)</span><a class="headerlink" href="#cruise.db_delete" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Runs a delete to remove data from the database</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>query</strong> – the sqlalchemy delete statement we want to run</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">nothing</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="cruise.find_search_results">
 <code class="descclassname">cruise.</code><code class="descname">find_search_results</code><span class="sig-paren">(</span><em>page=1</em><span class="sig-paren">)</span><a class="headerlink" href="#cruise.find_search_results" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Grab the content of affordabletours curise search website and return the search results</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>page</strong> – the number of pages to get</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">return the table that contains the search results</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="cruise.get_cruise_data">
 <code class="descclassname">cruise.</code><code class="descname">get_cruise_data</code><span class="sig-paren">(</span><em>cruise</em><span class="sig-paren">)</span><a class="headerlink" href="#cruise.get_cruise_data" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Parses a single row of the affordable tours cruise search results to get cruise information</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cruise</strong> – a single html row from the search results</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a list of information on a single cruise</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="cruise.main">
@@ -95,7 +194,18 @@
 <dl class="function">
 <dt id="cruise.remove_from_db">
 <code class="descclassname">cruise.</code><code class="descname">remove_from_db</code><span class="sig-paren">(</span><em>cruise_data</em><span class="sig-paren">)</span><a class="headerlink" href="#cruise.remove_from_db" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Remove a cruise from the database.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cruise_data</strong> – Should be a list in the following order [date, curise line, Cruise ship, The Destination, the departure port, how many night, the price in USD]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">nothing</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </div>
 
@@ -105,31 +215,19 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="index.html">Cheap Cruise Finder</a></h1>
-
-
-
-
-
-
-
-
-<h3>Navigation</h3>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">cruise module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="database_setup.html">database_setup module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="website.html">website module</a></li>
-</ul>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="index.html" title="previous chapter">src</a></li>
-      <li>Next: <a href="database_setup.html" title="next chapter">database_setup module</a></li>
-  </ul></li>
-</ul>
-</div>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">src</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="database_setup.html"
+                        title="next chapter">database_setup module</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/cruise.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
@@ -144,20 +242,27 @@
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2017, Chris Archibald.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.4</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
-      
-      |
-      <a href="_sources/cruise.rst.txt"
-          rel="nofollow">Page source</a>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="database_setup.html" title="database_setup module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="src"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Cheap Cruise Finder 0.1 documentation</a> &#187;</li> 
+      </ul>
     </div>
-
-    
-
-    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Chris Archibald.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.4.
+    </div>
   </body>
 </html>
