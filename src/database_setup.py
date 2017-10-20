@@ -33,6 +33,16 @@ class Cruise(Base):
     departs = relationship(Port)
     nights = Column(Integer)
     price = Column(Integer)
+    days = relationship("Day", back_populates="parent")
+
+class Day(Base):
+    """
+    Days contains the information about each day of the cruise
+    """
+    __tablename__ = 'day'
+    id = Column(Integer, primary_key=True)
+    cruise_id = Column(Integer, ForeignKey('cruise.id'))
+    cruise = relationship("Cruise", back_populates="days")
 
 engine = create_engine('sqlite:///db.db')
 Base.metadata.create_all(engine)
