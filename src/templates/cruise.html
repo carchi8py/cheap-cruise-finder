@@ -6,9 +6,11 @@
 <body>
 <table border="1">
     <tr>
+        <th>ID</th>
         <th>Date</th>
         <th>Cruise Line</th>
         <th>Ship</th>
+        <th>Type</th>
         <th>Departs</th>
         <th>Price</th>
         <th>Nights</th>
@@ -16,9 +18,11 @@
     </tr>
     {% for cruise in cruises %}
         <tr>
+            <td><a href="https://cruises.affordabletours.com/search/itsd/cruises/{{cruise.id}}">{{cruise.id}}</a></td>
             <td>{{cruise.date}}</td>
             <td>{{cruise.line.name}}</td>
             <td>{{cruise.ship.name}}</td>
+            <td>{{cruise.destination}}</td>
             <td>{{cruise.departs.name}}</td>
             <td>{{cruise.price}}</td>
             <td>{{cruise.nights}}</td>
