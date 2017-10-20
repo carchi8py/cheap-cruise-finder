@@ -2,9 +2,6 @@ from bs4 import BeautifulSoup
 import requests
 import datetime
 from re import sub
-import time
-from decimal import Decimal
-import sys
 
 from sqlalchemy import create_engine, exists
 from sqlalchemy.orm import sessionmaker
@@ -15,12 +12,10 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
-#To start with i'll hard code 21 (with is hawaiian cruises).
 DESTINATIONS = ["21", "10", "2"]
 URL = "https://cruises.affordabletours.com/search/advanced_search"
 
 def main():
-    works = True
     for destination in DESTINATIONS:
         works = True
         i = 1
@@ -41,7 +36,7 @@ def add_to_db(cruise_data):
     """
     Add a specific cruise to our database
 
-    :param cruise_data: Should be a list in the following order [date, curise line, Cruise ship, The Destination, the departure port, how many night, the price in USD]
+    :param cruise_data: Should be a list in the following order [date, curise line, Cruise ship, The Destination, the departure port, how many night, the price in USD, cruiseid]
     :return: nothing
     """
     #Check to see if a cruise line exists
@@ -63,7 +58,7 @@ def remove_from_db(cruise_data):
     """
     Remove a cruise from the database.
 
-    :param cruise_data: Should be a list in the following order [date, curise line, Cruise ship, The Destination, the departure port, how many night, the price in USD]
+    :param cruise_data: Should be a list in the following order [date, curise line, Cruise ship, The Destination, the departure port, how many night, the price in USD, cruiseid]
     :return: nothing
     """
     db_delete(session.query(Cruise).filter_by(nights = cruise_data[5]).first())
@@ -104,6 +99,13 @@ def add_port(port):
     commit(Port(name = port))
 
 def add_cruise(cruise_data, date_obj):
+    """
+    Add a specific cruise, line, ship, and port to our database
+
+    :param cruise_data: The Cruise object [date, curise line, Cruise ship, The Destination, the departure port, how many night, the price in USD, cruiseid]
+    :param date_obj: The date of the curise
+    :return: nothing
+    """
     line_obj = session.query(CruiseLine).filter_by(name = cruise_data[1]).one()
     ship_obj = session.query(Ship).filter_by(name = cruise_data[2]).one()
     port_obj = session.query(Port).filter_by(name = cruise_data[4]).one()
@@ -161,6 +163,7 @@ def find_search_results(page, params):
     Grab the content of affordabletours curise search website and return the search results
 
     :param page: the number of pages to get
+    :param params: the params we want to pass to the URL
     :return: return the table that contains the search results
     """
     params["Page"] = page

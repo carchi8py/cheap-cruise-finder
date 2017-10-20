@@ -56,7 +56,23 @@
 <dl class="function">
 <dt id="cruise.add_cruise">
 <code class="descclassname">cruise.</code><code class="descname">add_cruise</code><span class="sig-paren">(</span><em>cruise_data</em>, <em>date_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#cruise.add_cruise" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Add a specific cruise, line, ship, and port to our database</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>cruise_data</strong> – The Cruise object [date, curise line, Cruise ship, The Destination, the departure port, how many night, the price in USD, cruiseid]</li>
+<li><strong>date_obj</strong> – The date of the curise</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">nothing</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="cruise.add_cruiseline">
@@ -114,7 +130,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cruise_data</strong> – Should be a list in the following order [date, curise line, Cruise ship, The Destination, the departure port, how many night, the price in USD]</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cruise_data</strong> – Should be a list in the following order [date, curise line, Cruise ship, The Destination, the departure port, how many night, the price in USD, cruiseid]</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">nothing</td>
 </tr>
@@ -156,15 +172,20 @@
 
 <dl class="function">
 <dt id="cruise.find_search_results">
-<code class="descclassname">cruise.</code><code class="descname">find_search_results</code><span class="sig-paren">(</span><em>page=1</em><span class="sig-paren">)</span><a class="headerlink" href="#cruise.find_search_results" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">cruise.</code><code class="descname">find_search_results</code><span class="sig-paren">(</span><em>page</em>, <em>params</em><span class="sig-paren">)</span><a class="headerlink" href="#cruise.find_search_results" title="Permalink to this definition">¶</a></dt>
 <dd><p>Grab the content of affordabletours curise search website and return the search results</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>page</strong> – the number of pages to get</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>page</strong> – the number of pages to get</li>
+<li><strong>params</strong> – the params we want to pass to the URL</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">return the table that contains the search results</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">return the table that contains the search results</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -199,7 +220,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cruise_data</strong> – Should be a list in the following order [date, curise line, Cruise ship, The Destination, the departure port, how many night, the price in USD]</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cruise_data</strong> – Should be a list in the following order [date, curise line, Cruise ship, The Destination, the departure port, how many night, the price in USD, cruiseid]</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">nothing</td>
 </tr>
