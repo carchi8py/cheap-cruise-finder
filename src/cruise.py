@@ -2,11 +2,12 @@ from bs4 import BeautifulSoup
 import requests
 import datetime
 from re import sub
-import sys
+import time
+import random
 
 from sqlalchemy import create_engine, exists
 from sqlalchemy.orm import sessionmaker
-from database_setup import Base, CruiseLine, Ship, Port, Cruise
+from database_setup import Base, CruiseLine, Ship, Port, Cruise, Day
 
 engine = create_engine('sqlite:///db.db')
 Base.metadata.bind = engine
@@ -33,8 +34,9 @@ def main():
                 cruise_data = get_cruise_data(cruise)
                 add_to_db(cruise_data)
                 itinerary = get_crusie_info(cruise_data)
-                parse_days(itinerary)
-                sys.exit(1)
+                parse_days(itinerary, cruise_data[7])
+                #So we do hit the site to hard let wait some where between 1 and 20 seconds
+                time.sleep(random.randint(1,20))
             i+=1
 
 def add_to_db(cruise_data):
@@ -125,6 +127,39 @@ def add_cruise(cruise_data, date_obj):
                         price = money_int)
     commit(new_curise)
 
+def add_day(day_items):
+    curise_obj = session.query(Cruise).filter_by(id=day_items[5]).one()
+    if 0 < session.query(Day).filter_by(day = day_items[0], cruise = curise_obj).count():
+        return
+    arrival_time = None
+    departure_time = None
+    if not session.query(exists().where(Port.name == day_items[2])).scalar():
+        print("Adding port %s " % day_items[2])
+        add_port(day_items[2])
+    port_obj = session.query(Port).filter_by(name=day_items[2]).one()
+    date_obj = datetime.datetime.strptime(day_items[1], "%b %d, %Y").date()
+    if "---" not in day_items[3]:
+        if len(day_items[3].split(":")[0]) == 1:
+            day_items[3] = "0" + day_items[3]
+        day_items[3] = day_items[3].replace(".", "")
+        arrival_time = datetime.datetime.strptime(day_items[3], "%I:%M %p").time()
+    if "---" not in day_items[4]:
+        if len(day_items[4].split(":")[0]) == 1:
+            day_items[4] = "0" + day_items[4]
+        day_items[4] = day_items[4].replace(".", "")
+        departure_time = datetime.datetime.strptime(day_items[4], "%I:%M %p").time()
+    new_day = Day(day = day_items[0],
+                  date = date_obj,
+                  port = port_obj,
+                  cruise = curise_obj)
+    commit(new_day)
+    update_day = session.query(Day).filter_by(day=day_items[0], cruise=curise_obj).one()
+    if arrival_time:
+        update_day.arrival = arrival_time
+    if departure_time:
+        update_day.Departure = departure_time
+    commit(update_day)
+
 def commit(query):
     """
     Runs a commit to add data to the database
@@ -163,18 +198,17 @@ def get_cruise_data(cruise):
     price = cruise.find("td", {"class": "table-price"}).text
     return [date, line, ship, destination, departs, nights, price, id]
 
-def parse_days(itinerary):
+def parse_days(itinerary, curise_id):
     i = 1
     for each in itinerary[1:]:
         days = each.findAll("td")
         date = days[0].text.split(":")[1]
         port = days[1].text.split(":")[1]
-        arriavl = days[2].text.split(":",1)[1]
+        arrival = days[2].text.split(":",1)[1]
         departure = days[3].text.split(":",1)[1]
-        print(date)
-        print(port)
-        print(arriavl)
-        print(departure)
+        print(i, date, port, arrival, departure, curise_id)
+        add_day([i, date, port, arrival, departure, curise_id])
+        i += 1
 
 def find_search_results(page, params):
     """

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cruises</title>
+</head>
+<body>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>cruise</th>
+        <th>day</th>
+        <th>port</th>
+        <th>Arrival</th>
+        <th>Departure</th>
+    </tr>
+    {% for day in days %}
+        <tr>
+            <td>{{day.id}}</a></td>
+            <td>{{day.cruise.id}}</td>
+            <td>{{day.day}}</td>
+            <td>{{day.port.name}}</td>
+            <td>{{day.arrival}}</td>
+            <td>{{day.Departure}}</td>
+        </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
