@@ -41,6 +41,11 @@ def cruise_days():
     days = session.query(Day)
     return render_template('day.html', days=days)
 
+@app.route('/itinerary/<id>')
+def cruise_itinerary(id):
+    days = session.query(Day).filter_by(cruise_id = id)
+    return render_template('day.html', days=days)
+
 
 if __name__ == '__main__':
     app.secret_key = 'super_secret_key'

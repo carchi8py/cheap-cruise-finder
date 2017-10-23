@@ -139,15 +139,9 @@ def add_day(day_items):
     port_obj = session.query(Port).filter_by(name=day_items[2]).one()
     date_obj = datetime.datetime.strptime(day_items[1], "%b %d, %Y").date()
     if "---" not in day_items[3]:
-        if len(day_items[3].split(":")[0]) == 1:
-            day_items[3] = "0" + day_items[3]
-        day_items[3] = day_items[3].replace(".", "")
-        arrival_time = datetime.datetime.strptime(day_items[3], "%I:%M %p").time()
+        arrival_time = format_time(day_items[3])
     if "---" not in day_items[4]:
-        if len(day_items[4].split(":")[0]) == 1:
-            day_items[4] = "0" + day_items[4]
-        day_items[4] = day_items[4].replace(".", "")
-        departure_time = datetime.datetime.strptime(day_items[4], "%I:%M %p").time()
+        departure_time = format_time(day_items[4])
     new_day = Day(day = day_items[0],
                   date = date_obj,
                   port = port_obj,
@@ -159,6 +153,26 @@ def add_day(day_items):
     if departure_time:
         update_day.Departure = departure_time
     commit(update_day)
+
+def format_time(unformatted_time):
+    """
+    Sanitize the times we get from the website so python can understand them
+
+    :param unformatted_time: the unformated times
+    :return: the formated times.
+    """
+    #Python hour format require a lead zero so, 1:00am become 01:00AM
+    if len(unformatted_time.split(":")[0]) == 1:
+        unformatted_time = "0" + unformatted_time
+    #They use P.M. python time formating wants PM
+    unformatted_time = unformatted_time.replace(".", "")
+    #even though there using a 12 hour clock they sometime use 00 for 12:00am
+    unformatted_time = unformatted_time.replace("00:", "12:")
+    #Sometime they print Noon instead of 12:00 pm"
+    if unformatted_time == "Noon":
+        unformatted_time = "12:00 pm"
+    return datetime.datetime.strptime(unformatted_time, "%I:%M %p").time()
+
 
 def commit(query):
     """
@@ -202,12 +216,17 @@ def parse_days(itinerary, curise_id):
     i = 1
     for each in itinerary[1:]:
         days = each.findAll("td")
+        #For some cruise lines (like  Viking Cruises) they use a different format, i'll skip these
+        if len(days) < 4:
+            return
         date = days[0].text.split(":")[1]
         port = days[1].text.split(":")[1]
         arrival = days[2].text.split(":",1)[1]
         departure = days[3].text.split(":",1)[1]
-        print(i, date, port, arrival, departure, curise_id)
-        add_day([i, date, port, arrival, departure, curise_id])
+        try:
+            add_day([i, date, port, arrival, departure, curise_id])
+        except:
+            print("Couldn't add cruise")
         i += 1
 
 def find_search_results(page, params):

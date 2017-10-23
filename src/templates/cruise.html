@@ -18,7 +18,7 @@
     </tr>
     {% for cruise in cruises %}
         <tr>
-            <td><a href="https://cruises.affordabletours.com/search/itsd/cruises/{{cruise.id}}">{{cruise.id}}</a></td>
+            <td><a href="/itinerary/{{cruise.id}}">{{cruise.id}}</a></td>
             <td>{{cruise.date}}</td>
             <td>{{cruise.line.name}}</td>
             <td>{{cruise.ship.name}}</td>
