@@ -91,6 +91,11 @@
 </dd></dl>
 
 <dl class="function">
+<dt id="cruise.add_day">
+<code class="descclassname">cruise.</code><code class="descname">add_day</code><span class="sig-paren">(</span><em>day_items</em><span class="sig-paren">)</span><a class="headerlink" href="#cruise.add_day" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
 <dt id="cruise.add_port">
 <code class="descclassname">cruise.</code><code class="descname">add_port</code><span class="sig-paren">(</span><em>port</em><span class="sig-paren">)</span><a class="headerlink" href="#cruise.add_port" title="Permalink to this definition">¶</a></dt>
 <dd><p>Commis a Port to the Port table in the database</p>
@@ -192,6 +197,22 @@
 </dd></dl>
 
 <dl class="function">
+<dt id="cruise.format_time">
+<code class="descclassname">cruise.</code><code class="descname">format_time</code><span class="sig-paren">(</span><em>unformatted_time</em><span class="sig-paren">)</span><a class="headerlink" href="#cruise.format_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sanitize the times we get from the website so python can understand them</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>unformatted_time</strong> – the unformated times</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the formated times.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="cruise.get_cruise_data">
 <code class="descclassname">cruise.</code><code class="descname">get_cruise_data</code><span class="sig-paren">(</span><em>cruise</em><span class="sig-paren">)</span><a class="headerlink" href="#cruise.get_cruise_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parses a single row of the affordable tours cruise search results to get cruise information</p>
@@ -208,9 +229,46 @@
 </dd></dl>
 
 <dl class="function">
+<dt id="cruise.get_crusie_info">
+<code class="descclassname">cruise.</code><code class="descname">get_crusie_info</code><span class="sig-paren">(</span><em>cruise_id</em><span class="sig-paren">)</span><a class="headerlink" href="#cruise.get_crusie_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Grab the content of a specific cruise from affordable tours website</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cruise_id</strong> – The cruise ID to grab data from</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The table that contains the cruise itinerary</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="cruise.main">
 <code class="descclassname">cruise.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cruise.main" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="function">
+<dt id="cruise.parse_days">
+<code class="descclassname">cruise.</code><code class="descname">parse_days</code><span class="sig-paren">(</span><em>itinerary</em>, <em>curise_id</em><span class="sig-paren">)</span><a class="headerlink" href="#cruise.parse_days" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse each day in a cruise itinerary.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>itinerary</strong> – The Cruise’s itinerary in HTML format</li>
+<li><strong>curise_id</strong> – The Cruise_id so that we can create a ForeignKey relation</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">nothing</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="cruise.remove_from_db">
