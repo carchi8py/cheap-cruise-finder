@@ -33,7 +33,7 @@ def main():
             for cruise in cruises[1:]:
                 cruise_data = get_cruise_data(cruise)
                 add_to_db(cruise_data)
-                itinerary = get_crusie_info(cruise_data)
+                itinerary = get_crusie_info(cruise_data[7])
                 parse_days(itinerary, cruise_data[7])
                 #So we do hit the site to hard let wait some where between 1 and 20 seconds
                 time.sleep(random.randint(1,20))
@@ -213,6 +213,13 @@ def get_cruise_data(cruise):
     return [date, line, ship, destination, departs, nights, price, id]
 
 def parse_days(itinerary, curise_id):
+    """
+    Parse each day in a cruise itinerary.
+
+    :param itinerary: The Cruise's itinerary in HTML format
+    :param curise_id: The Cruise_id so that we can create a ForeignKey relation
+    :return: nothing
+    """
     i = 1
     for each in itinerary[1:]:
         days = each.findAll("td")
@@ -244,9 +251,14 @@ def find_search_results(page, params):
     results = soup.find("table", {"class": "search-results"})
     return results.findAll("tr")
 
-def get_crusie_info(data):
-    id = data[7]
-    r = requests.get(INFO_URL + str(id))
+def get_crusie_info(cruise_id):
+    """
+    Grab the content of a specific cruise from affordable tours website
+
+    :param cruise_id: The cruise ID to grab data from
+    :return: The table that contains the cruise itinerary
+    """
+    r = requests.get(INFO_URL + str(cruise_id))
     print(r.url)
     soup = BeautifulSoup(r.text, "html.parser")
     results = soup.find("table", {"id": "maintable"})
