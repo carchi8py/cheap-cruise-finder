@@ -77,6 +77,12 @@ def remove_from_db(cruise_data):
     db_delete(session.query(CruiseLine).filter_by(name=cruise_data[1]).first())
     print("Removing CruiseLine")
 
+def remove_day(day_items):
+    days = session.query(Day).filter_by(day=day_items[0])
+    for day in days:
+        db_delete(day)
+        print("Removed day")
+
 
 def add_cruiseline(cruise_line):
     """
@@ -147,6 +153,7 @@ def add_day(day_items):
                   port = port_obj,
                   cruise = curise_obj)
     commit(new_day)
+    print("Add new day %s %s %s %s" % (day_items, date_obj, port_obj, curise_obj))
     update_day = session.query(Day).filter_by(day=day_items[0], cruise=curise_obj).one()
     if arrival_time:
         update_day.arrival = arrival_time
