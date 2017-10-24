@@ -26,11 +26,12 @@ FAKE_DESTINATION = "Mars"
 FAKE_DEPARTS = "Earth"
 FAKE_NIGHTS = "2000"
 FAKE_PRICE = "$999,999,999,999"
+FAKE_CRUISE_ID = 999999999999
 
 
 class testAddCruiseToDatabase(unittest.TestCase):
     def test_adding_to_database(self):
-        fake_cruise = [FAKE_DATE, FAKE_LINE, FAKE_SHIP, FAKE_DESTINATION, FAKE_DEPARTS, FAKE_NIGHTS, FAKE_PRICE]
+        fake_cruise = [FAKE_DATE, FAKE_LINE, FAKE_SHIP, FAKE_DESTINATION, FAKE_DEPARTS, FAKE_NIGHTS, FAKE_PRICE, FAKE_CRUISE_ID]
         cruise.add_to_db(fake_cruise)
         test_cruise = session.query(Cruise).filter_by(nights=FAKE_NIGHTS).one()
         self.assertEqual(test_cruise.line.name, FAKE_LINE)
