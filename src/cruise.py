@@ -14,7 +14,8 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
-DESTINATIONS = ["21", "10", "2"]
+#DESTINATIONS = ["21", "10", "2"]
+DESTINATIONS = ["21"]
 URL = "https://cruises.affordabletours.com/search/advanced_search"
 INFO_URL = "https://cruises.affordabletours.com/search/itsd/cruises/"
 
@@ -36,7 +37,7 @@ def main():
                 itinerary = get_crusie_info(cruise_data[7])
                 parse_days(itinerary, cruise_data[7])
                 #So we do hit the site to hard let wait some where between 1 and 20 seconds
-                time.sleep(random.randint(1,20))
+                time.sleep(random.randint(1,10))
             i+=1
 
 def add_to_db(cruise_data):
@@ -51,7 +52,7 @@ def add_to_db(cruise_data):
         add_cruiseline(cruise_data[1])
         print("Adding CruiseLine %s to database" % cruise_data[1])
     if not session.query(exists().where(Ship.name == cruise_data[2])).scalar():
-        add_ship(cruise_data[2])
+        add_ship(cruise_data[2], cruise_data[1])
         print("Adding Ship %s to database" % cruise_data[2])
     if not session.query(exists().where(Port.name == cruise_data[4])).scalar():
         add_port(cruise_data[4])
@@ -93,14 +94,16 @@ def add_cruiseline(cruise_line):
     """
     commit(CruiseLine(name = cruise_line))
 
-def add_ship(ship):
+def add_ship(ship, line):
     """
     Commit a cruise ship to the cruise ship table in the database
 
     :param ship: the name of the cruise ship
+    :param line: the curise line that own the ship
     :return: nothing
     """
-    commit(Ship(name = ship))
+    line_obj = session.query(CruiseLine).filter_by(name = line).one()
+    commit(Ship(name = ship, line = line_obj))
 
 def add_port(port):
     """
