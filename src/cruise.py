@@ -2,10 +2,12 @@ from bs4 import BeautifulSoup
 import requests
 import datetime
 from re import sub
+import time
+import random
 
 from sqlalchemy import create_engine, exists
 from sqlalchemy.orm import sessionmaker
-from database_setup import Base, CruiseLine, Ship, Port, Cruise
+from database_setup import Base, CruiseLine, Ship, Port, Cruise, Day
 
 engine = create_engine('sqlite:///db.db')
 Base.metadata.bind = engine
@@ -14,6 +16,7 @@ session = DBSession()
 
 DESTINATIONS = ["21", "10", "2"]
 URL = "https://cruises.affordabletours.com/search/advanced_search"
+INFO_URL = "https://cruises.affordabletours.com/search/itsd/cruises/"
 
 def main():
     for destination in DESTINATIONS:
@@ -30,6 +33,10 @@ def main():
             for cruise in cruises[1:]:
                 cruise_data = get_cruise_data(cruise)
                 add_to_db(cruise_data)
+                itinerary = get_crusie_info(cruise_data[7])
+                parse_days(itinerary, cruise_data[7])
+                #So we do hit the site to hard let wait some where between 1 and 20 seconds
+                time.sleep(random.randint(1,20))
             i+=1
 
 def add_to_db(cruise_data):
@@ -69,6 +76,12 @@ def remove_from_db(cruise_data):
     print("Removing Ship")
     db_delete(session.query(CruiseLine).filter_by(name=cruise_data[1]).first())
     print("Removing CruiseLine")
+
+def remove_day(day_items):
+    days = session.query(Day).filter_by(day=day_items[0])
+    for day in days:
+        db_delete(day)
+        print("Removed day")
 
 
 def add_cruiseline(cruise_line):
@@ -120,6 +133,54 @@ def add_cruise(cruise_data, date_obj):
                         price = money_int)
     commit(new_curise)
 
+def add_day(day_items):
+    curise_obj = session.query(Cruise).filter_by(id=day_items[5]).one()
+    if 0 < session.query(Day).filter_by(day = day_items[0], cruise = curise_obj).count():
+        return
+    arrival_time = None
+    departure_time = None
+    if not session.query(exists().where(Port.name == day_items[2])).scalar():
+        print("Adding port %s " % day_items[2])
+        add_port(day_items[2])
+    port_obj = session.query(Port).filter_by(name=day_items[2]).one()
+    date_obj = datetime.datetime.strptime(day_items[1], "%b %d, %Y").date()
+    if "---" not in day_items[3]:
+        arrival_time = format_time(day_items[3])
+    if "---" not in day_items[4]:
+        departure_time = format_time(day_items[4])
+    new_day = Day(day = day_items[0],
+                  date = date_obj,
+                  port = port_obj,
+                  cruise = curise_obj)
+    commit(new_day)
+    print("Add new day %s %s %s %s" % (day_items, date_obj, port_obj, curise_obj))
+    update_day = session.query(Day).filter_by(day=day_items[0], cruise=curise_obj).one()
+    if arrival_time:
+        update_day.arrival = arrival_time
+    if departure_time:
+        update_day.Departure = departure_time
+    commit(update_day)
+
+def format_time(unformatted_time):
+    """
+    Sanitize the times we get from the website so python can understand them
+
+    :param unformatted_time: the unformated times
+    :return: the formated times.
+    """
+    #Python hour format require a lead zero so, 1:00am become 01:00AM
+    if len(unformatted_time.split(":")[0]) == 1:
+        unformatted_time = "0" + unformatted_time
+    #They use P.M. python time formating wants PM
+    unformatted_time = unformatted_time.replace(".", "")
+    #even though there using a 12 hour clock they sometime use 00 for 12:00am
+    unformatted_time = unformatted_time.replace("00:", "12:")
+    #Sometime they print Noon instead of 12:00 pm"
+    if unformatted_time == "Noon":
+        unformatted_time = "12:00 pm"
+    return datetime.datetime.strptime(unformatted_time, "%I:%M %p").time()
+
+
 def commit(query):
     """
     Runs a commit to add data to the database
@@ -158,6 +219,30 @@ def get_cruise_data(cruise):
     price = cruise.find("td", {"class": "table-price"}).text
     return [date, line, ship, destination, departs, nights, price, id]
 
+def parse_days(itinerary, curise_id):
+    """
+    Parse each day in a cruise itinerary.
+
+    :param itinerary: The Cruise's itinerary in HTML format
+    :param curise_id: The Cruise_id so that we can create a ForeignKey relation
+    :return: nothing
+    """
+    i = 1
+    for each in itinerary[1:]:
+        days = each.findAll("td")
+        #For some cruise lines (like  Viking Cruises) they use a different format, i'll skip these
+        if len(days) < 4:
+            return
+        date = days[0].text.split(":")[1]
+        port = days[1].text.split(":")[1]
+        arrival = days[2].text.split(":",1)[1]
+        departure = days[3].text.split(":",1)[1]
+        try:
+            add_day([i, date, port, arrival, departure, curise_id])
+        except:
+            print("Couldn't add cruise")
+        i += 1
+
 def find_search_results(page, params):
     """
     Grab the content of affordabletours curise search website and return the search results
@@ -172,6 +257,20 @@ def find_search_results(page, params):
     soup = BeautifulSoup(r.text, "html.parser")
     results = soup.find("table", {"class": "search-results"})
     return results.findAll("tr")
+
+def get_crusie_info(cruise_id):
+    """
+    Grab the content of a specific cruise from affordable tours website
+
+    :param cruise_id: The cruise ID to grab data from
+    :return: The table that contains the cruise itinerary
+    """
+    r = requests.get(INFO_URL + str(cruise_id))
+    print(r.url)
+    soup = BeautifulSoup(r.text, "html.parser")
+    results = soup.find("table", {"id": "maintable"})
+    return results.findAll("tr")
+
 
 if __name__ == "__main__":
     main()

@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from database_setup import Base, CruiseLine, Ship, Port, Cruise
+from database_setup import Base, CruiseLine, Ship, Port, Cruise, Day
 
 app = Flask(__name__)
 
@@ -35,6 +35,16 @@ def ports():
 def cruise_by_price_pre_day():
     cruises = session.query(Cruise).order_by(Cruise.price/Cruise.nights)
     return render_template('cruise.html', cruises=cruises)
+
+@app.route('/days/')
+def cruise_days():
+    days = session.query(Day)
+    return render_template('day.html', days=days)
+
+@app.route('/itinerary/<id>')
+def cruise_itinerary(id):
+    days = session.query(Day).filter_by(cruise_id = id)
+    return render_template('day.html', days=days)
 
 
 if __name__ == '__main__':

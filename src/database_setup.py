@@ -1,4 +1,4 @@
-from sqlalchemy import Column, ForeignKey, Integer, String, Date
+from sqlalchemy import Column, ForeignKey, Integer, String, Date, Time
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
@@ -33,6 +33,23 @@ class Cruise(Base):
     departs = relationship(Port)
     nights = Column(Integer)
     price = Column(Integer)
+    days = relationship("Day", back_populates="cruise")
+
+class Day(Base):
+    """
+    Days contains the information about each day of the cruise
+    """
+    __tablename__ = 'day'
+    id = Column(Integer, primary_key=True)
+    cruise_id = Column(Integer, ForeignKey('cruise.id'))
+    cruise = relationship("Cruise", back_populates="days")
+    day = Column(Integer)
+    date = Column(Date)
+    port_id = Column(Integer, ForeignKey('port.id'))
+    port = relationship(Port)
+    arrival = Column(Time)
+    Departure = Column(Time)
+
 
 engine = create_engine('sqlite:///db.db')
 Base.metadata.create_all(engine)
