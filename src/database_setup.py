@@ -17,6 +17,13 @@ class Ship(Base):
     name = Column(String(128), nullable=False)
     line_id = Column(Integer, ForeignKey('cruiseline.id'))
     line = relationship("CruiseLine", back_populates="ships")
+    build_year = Column(Integer)
+    refurbished_year = Column(Integer)
+    crew = Column(Integer)
+    passagers = Column(Integer)
+    bars = Column(Integer)
+    pools = Column(Integer)
+    Casinos = Column(Integer)
 
 class Port(Base):
     __tablename__ = "port"

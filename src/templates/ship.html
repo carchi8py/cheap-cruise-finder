@@ -5,9 +5,29 @@
 </head>
 <body>
 <table border="1">
-    <tr><th>Ship Names</th></tr>
+    <tr>
+        <th>Ship Names</th>
+        <th>Cruise Line</th>
+        <th>Build Year</th>
+        <th>Refurbished Year</th>
+        <th>Crew</th>
+        <th>Passagers</th>
+        <th>bars</th>
+        <th>Pools</th>
+        <th>Casinos</th>
+    </tr>
     {% for ship in ships %}
-        <tr><td>{{ship.name}}</td></tr>
+        <tr>
+            <td>{{ship.name}}</td>
+            <td>{{ship.line.name}}</td>
+            <td>{{ship.build_year}}</td>
+            <td>{{ship.refurbished_year}}</td>
+            <td>{{ship.crew}}</td>
+            <td>{{ship.passagers}}</td>
+            <td>{{ship.bars}}</td>
+            <td>{{ship.pools}}</td>
+            <td>{{ship.Casinos}}</td>
+        </tr>
     {% endfor %}
 </table>
 </body>
