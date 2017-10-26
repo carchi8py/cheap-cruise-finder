@@ -7,7 +7,6 @@
 <table border="1">
     <tr>
         <th>Ship Names</th>
-        <th>Cruise Line</th>
         <th>Build Year</th>
         <th>Refurbished Year</th>
         <th>Crew</th>
@@ -19,7 +18,6 @@
     {% for ship in ships %}
         <tr>
             <td>{{ship.name}}</td>
-            <td>{{ship.line.name}}</td>
             <td>{{ship.build_year}}</td>
             <td>{{ship.refurbished_year}}</td>
             <td>{{ship.crew}}</td>
