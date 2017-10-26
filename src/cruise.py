@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 import datetime
 from re import sub
+import sys
 import time
 import random
 
@@ -37,7 +38,7 @@ def main():
                 itinerary = get_crusie_info(cruise_data[7])
                 parse_days(itinerary, cruise_data[7])
                 #So we do hit the site to hard let wait some where between 1 and 20 seconds
-                time.sleep(random.randint(1,10))
+                #time.sleep(random.randint(1,10))
             i+=1
 
 def add_to_db(cruise_data):
