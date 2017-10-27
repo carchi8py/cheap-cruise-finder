@@ -6,17 +6,12 @@ import time
 import random
 import sys
 
-from sqlalchemy import create_engine, exists
-from sqlalchemy.orm import sessionmaker
 from database_setup import Base, CruiseLine, Ship, Port, Cruise, Day
+import db
 
-engine = create_engine('sqlite:///db.db')
-Base.metadata.bind = engine
-DBSession = sessionmaker(bind=engine)
-session = DBSession()
 
 def main():
-    ships = session.query(Ship).all()
+    ships = db.session.query(Ship).all()
     for ship in ships[1:]:
         get_ship_info(ship)
 
@@ -62,8 +57,11 @@ def parse_results(resutls, ship_obj):
             print(each.find("h5").text)
             print(each.find("h3").text)
         else:
-            session.add(ship_obj)
-            session.commit()
+            if not ship_obj:
+                continue
+            else:
+                db.session.add(ship_obj)
+                db.session.commit()
 
 def create_url(ship):
     url = "https://cruises.affordabletours.com/"
