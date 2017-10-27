@@ -1,32 +1,33 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
     <title>cruise module &#8212; Cheap Cruise Finder 0.1 documentation</title>
+    
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
         VERSION:     '0.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
+        HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="Cheap Cruise Finder 0.1 documentation" href="index.html" />
     <link rel="next" title="database_setup module" href="database_setup.html" />
     <link rel="prev" title="src" href="index.html" /> 
   </head>
-  <body>
+  <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -62,8 +63,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>cruise_data</strong> – The Cruise object [date, curise line, Cruise ship, The Destination, the departure port, how many night, the price in USD, cruiseid]</li>
-<li><strong>date_obj</strong> – The date of the curise</li>
+<li><strong>cruise_data</strong> &#8211; The Cruise object [date, curise line, Cruise ship, The Destination, the departure port, how many night, the price in USD, cruiseid]</li>
+<li><strong>date_obj</strong> &#8211; The date of the curise</li>
 </ul>
 </td>
 </tr>
@@ -82,7 +83,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cruise_line</strong> – The name of the Cruise line</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cruise_line</strong> &#8211; The name of the Cruise line</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">nothing</td>
 </tr>
@@ -103,7 +104,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>port</strong> – The name of the Port</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>port</strong> &#8211; The name of the Port</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">nothing</td>
 </tr>
@@ -113,15 +114,20 @@
 
 <dl class="function">
 <dt id="cruise.add_ship">
-<code class="descclassname">cruise.</code><code class="descname">add_ship</code><span class="sig-paren">(</span><em>ship</em><span class="sig-paren">)</span><a class="headerlink" href="#cruise.add_ship" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">cruise.</code><code class="descname">add_ship</code><span class="sig-paren">(</span><em>ship</em>, <em>line</em><span class="sig-paren">)</span><a class="headerlink" href="#cruise.add_ship" title="Permalink to this definition">¶</a></dt>
 <dd><p>Commit a cruise ship to the cruise ship table in the database</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ship</strong> – the name of the cruise ship</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>ship</strong> &#8211; the name of the cruise ship</li>
+<li><strong>line</strong> &#8211; the curise line that own the ship</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">nothing</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">nothing</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -135,7 +141,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cruise_data</strong> – Should be a list in the following order [date, curise line, Cruise ship, The Destination, the departure port, how many night, the price in USD, cruiseid]</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cruise_data</strong> &#8211; Should be a list in the following order [date, curise line, Cruise ship, The Destination, the departure port, how many night, the price in USD, cruiseid]</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">nothing</td>
 </tr>
@@ -151,7 +157,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>query</strong> – the sqlalchemy add statement we want to run</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>query</strong> &#8211; the sqlalchemy add statement we want to run</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">nothing</td>
 </tr>
@@ -167,7 +173,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>query</strong> – the sqlalchemy delete statement we want to run</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>query</strong> &#8211; the sqlalchemy delete statement we want to run</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">nothing</td>
 </tr>
@@ -184,8 +190,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>page</strong> – the number of pages to get</li>
-<li><strong>params</strong> – the params we want to pass to the URL</li>
+<li><strong>page</strong> &#8211; the number of pages to get</li>
+<li><strong>params</strong> &#8211; the params we want to pass to the URL</li>
 </ul>
 </td>
 </tr>
@@ -204,7 +210,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>unformatted_time</strong> – the unformated times</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>unformatted_time</strong> &#8211; the unformated times</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the formated times.</td>
 </tr>
@@ -220,7 +226,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cruise</strong> – a single html row from the search results</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cruise</strong> &#8211; a single html row from the search results</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a list of information on a single cruise</td>
 </tr>
@@ -236,7 +242,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cruise_id</strong> – The cruise ID to grab data from</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cruise_id</strong> &#8211; The cruise ID to grab data from</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The table that contains the cruise itinerary</td>
 </tr>
@@ -258,8 +264,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>itinerary</strong> – The Cruise’s itinerary in HTML format</li>
-<li><strong>curise_id</strong> – The Cruise_id so that we can create a ForeignKey relation</li>
+<li><strong>itinerary</strong> &#8211; The Cruise&#8217;s itinerary in HTML format</li>
+<li><strong>curise_id</strong> &#8211; The Cruise_id so that we can create a ForeignKey relation</li>
 </ul>
 </td>
 </tr>
@@ -271,6 +277,11 @@
 </dd></dl>
 
 <dl class="function">
+<dt id="cruise.remove_day">
+<code class="descclassname">cruise.</code><code class="descname">remove_day</code><span class="sig-paren">(</span><em>day_items</em><span class="sig-paren">)</span><a class="headerlink" href="#cruise.remove_day" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
 <dt id="cruise.remove_from_db">
 <code class="descclassname">cruise.</code><code class="descname">remove_from_db</code><span class="sig-paren">(</span><em>cruise_data</em><span class="sig-paren">)</span><a class="headerlink" href="#cruise.remove_from_db" title="Permalink to this definition">¶</a></dt>
 <dd><p>Remove a cruise from the database.</p>
@@ -278,7 +289,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cruise_data</strong> – Should be a list in the following order [date, curise line, Cruise ship, The Destination, the departure port, how many night, the price in USD, cruiseid]</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cruise_data</strong> &#8211; Should be a list in the following order [date, curise line, Cruise ship, The Destination, the departure port, how many night, the price in USD, cruiseid]</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">nothing</td>
 </tr>
@@ -303,7 +314,7 @@
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/cruise.rst.txt"
+      <li><a href="_sources/cruise.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -341,7 +352,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Chris Archibald.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.4.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
     </div>
   </body>
 </html>
