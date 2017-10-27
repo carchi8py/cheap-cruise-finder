@@ -49,22 +49,69 @@
 <dl class="function">
 <dt id="ships.create_url">
 <code class="descclassname">ships.</code><code class="descname">create_url</code><span class="sig-paren">(</span><em>ship</em><span class="sig-paren">)</span><a class="headerlink" href="#ships.create_url" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Create the proper URL for a specific ship</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ship</strong> &#8211; The ship object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the url to find the ship information</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="ships.get_ship_info">
 <code class="descclassname">ships.</code><code class="descname">get_ship_info</code><span class="sig-paren">(</span><em>ship_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#ships.get_ship_info" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Grab the html that contains the ships info</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ship_obj</strong> &#8211; the ship database object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">nothing</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="ships.main">
 <code class="descclassname">ships.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ships.main" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Get information for all the ships in the database</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">nothing</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="ships.parse_results">
 <code class="descclassname">ships.</code><code class="descname">parse_results</code><span class="sig-paren">(</span><em>resutls</em>, <em>ship_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#ships.parse_results" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Parse the HTML to get the information we care about for ships</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>resutls</strong> &#8211; The HTML with the ship information</li>
+<li><strong>ship_obj</strong> &#8211; The Database object for the ship</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Nothing</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </div>
 
