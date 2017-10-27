@@ -36,6 +36,10 @@ class testAddShipInfoToDatabase(unittest.TestCase):
         cruise.add_to_db(fake_cruise)
         test_ship = db.session.query(Ship).filter_by(name=FAKE_SHIP).first()
         ships.parse_results(resutls, test_ship)
+        self.assertEqual(test_ship.name,FAKE_SHIP)
+        cruise.remove_from_db(fake_cruise)
+        test_ship = db.session.query(Ship).filter_by(name=FAKE_SHIP).first()
+        self.assertIsNone(test_ship)
 
 if __name__=="__main__":
     unittest.main()
