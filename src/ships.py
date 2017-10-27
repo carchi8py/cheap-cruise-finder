@@ -11,11 +11,25 @@ import db
 
 
 def main():
+    """
+    Get information for all the ships in the database
+
+    :return: nothing
+    """
     ships = db.session.query(Ship).all()
-    for ship in ships[1:]:
-        get_ship_info(ship)
+    for ship in ships:
+        try:
+            get_ship_info(ship)
+        except:
+            continue
 
 def get_ship_info(ship_obj):
+    """
+    Grab the html that contains the ships info
+
+    :param ship_obj: the ship database object
+    :return: nothing
+    """
     ship_url = create_url(ship_obj)
     r = requests.get(ship_url)
     print(ship_url)
@@ -30,6 +44,13 @@ def get_ship_info(ship_obj):
 
 
 def parse_results(resutls, ship_obj):
+    """
+    Parse the HTML to get the information we care about for ships
+
+    :param resutls: The HTML with the ship information
+    :param ship_obj: The Database object for the ship
+    :return: Nothing
+    """
     for each in resutls:
         update = False
         if each.find("h5").text == "Built Year":
@@ -64,6 +85,12 @@ def parse_results(resutls, ship_obj):
                 db.session.commit()
 
 def create_url(ship):
+    """
+    Create the proper URL for a specific ship
+
+    :param ship: The ship object
+    :return: the url to find the ship information
+    """
     url = "https://cruises.affordabletours.com/"
     line = ship.line.name
     #replace spaces with "_"
