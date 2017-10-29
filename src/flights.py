@@ -34,12 +34,12 @@ def main():
         end_date = days[len(days) -1 ].date
         if TEST_AIRPORT != start_airport:
             to_flight = generate_flight_url(start_date, TEST_AIRPORT, start_airport)
-            get_flight_details(to_flight)
+            to_flight_data = get_flight_details(to_flight)
         if TEST_AIRPORT != end_airport:
             from_flight = generate_flight_url(end_date, end_airport, TEST_AIRPORT)
-            get_flight_details(from_flight)
+            from_flight_data = get_flight_details(from_flight)
 
-        sys.exit(1)
+        time.sleep(5)
 
 def get_airport_code(location):
     location_url = generate_location_url(location)
@@ -52,7 +52,10 @@ def get_airport_code(location):
 def get_flight_details(flight_url):
     r = requests.get(flight_url)
     parsed_json = json.loads(r.text)
-    print(parsed_json)
+    if parsed_json["data"] == []:
+        return None
+    else:
+        return parsed_json["data"]
 
 
 def generate_location_url(location):
