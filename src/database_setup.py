@@ -51,7 +51,7 @@ class Cruise(Base):
     nights = Column(Integer)
     price = Column(Integer)
     days = relationship("Day", back_populates="cruise")
-    flights = relationship("Flight", base_populates="cruise")
+    flights = relationship("Flight", back_populates="cruise")
 
 class Day(Base):
     """

@@ -7,7 +7,7 @@ import random
 import sys
 import json
 
-from database_setup import Base, CruiseLine, Ship, Port, Cruise, Day
+from database_setup import Base, CruiseLine, Ship, Port, Cruise, Day, Flight
 import db
 
 LOCATION_URL = 'https://locations.skypicker.com/?term="'
@@ -35,11 +35,19 @@ def main():
         if TEST_AIRPORT != start_airport:
             to_flight = generate_flight_url(start_date, TEST_AIRPORT, start_airport)
             to_flight_data = get_flight_details(to_flight)
+            add_to_cruise(to_flight_data, cruise)
         if TEST_AIRPORT != end_airport:
             from_flight = generate_flight_url(end_date, end_airport, TEST_AIRPORT)
             from_flight_data = get_flight_details(from_flight)
+            add_to_cruise(from_flight_data, cruise)
 
-        time.sleep(5)
+def add_to_cruise(flight_data, cruise):
+    price = "9999"
+    if flight_data != None:
+        price = flight_data[0]["price"]
+    new_flight = Flight(cost = int(price), cruise = cruise)
+    db.session.add(new_flight)
+    db.session.commit()
 
 def get_airport_code(location):
     location_url = generate_location_url(location)
@@ -66,10 +74,13 @@ def generate_location_url(location):
     return url
 
 def generate_flight_url(date_obj, from_airport, to_airport):
-    url = FLIGHT_URL1 + from_airport + FLIGHT_URL2 + to_airport + FLIGHT_URL3
-    url = url + date_obj.strftime("%d/%m/%Y") + FLIGHT_URL4
-    url = url + date_obj.strftime("%d/%m/%Y") + FLIGHT_URL5
-    print(url)
+    try:
+        url = FLIGHT_URL1 + from_airport + FLIGHT_URL2 + to_airport + FLIGHT_URL3
+        url = url + date_obj.strftime("%d/%m/%Y") + FLIGHT_URL4
+        url = url + date_obj.strftime("%d/%m/%Y") + FLIGHT_URL5
+        print(url)
+    except:
+        return None
     return url
 
 if __name__ == "__main__":

@@ -2,20 +2,33 @@
 <html>
 <head>
     <title>Cruises</title>
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+    <script type="text/javascript">
+        $(document).ready( function () {
+        $('#table_id').DataTable();
+        } );
+    </script>
 </head>
 <body>
-<table border="1">
-    <tr>
-        <th>ID</th>
-        <th>Date</th>
-        <th>Cruise Line</th>
-        <th>Ship</th>
-        <th>Type</th>
-        <th>Departs</th>
-        <th>Price</th>
-        <th>Nights</th>
-        <th>Price Per Night</th>
-    </tr>
+
+<table border="1" id="table_id" class="display">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Cruise Line</th>
+            <th>Ship</th>
+            <th>Type</th>
+            <th>Departs</th>
+            <th>Cruise Price</th>
+            <th>Flight Price</th>
+            <th>Nights</th>
+            <th>Price Per Night</th>
+        </tr>
+    </thead>
+     <tbody>
     {% for cruise in cruises %}
         <tr>
             <td><a href="/itinerary/{{cruise.id}}">{{cruise.id}}</a></td>
@@ -25,10 +38,12 @@
             <td>{{cruise.destination}}</td>
             <td>{{cruise.departs.name}}</td>
             <td>{{cruise.price}}</td>
+            <td>{{cruise.total - cruise.price}}</td>
             <td>{{cruise.nights}}</td>
-            <td>{{cruise.price/cruise.nights}}</td>
+            <td>{{cruise.total/cruise.nights}}</td>
         </tr>
     {% endfor %}
+     </tbody>
 </table>
 </body>
 </html>
