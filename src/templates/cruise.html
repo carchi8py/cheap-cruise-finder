@@ -21,7 +21,6 @@
             <th>Cruise Line</th>
             <th>Ship</th>
             <th>Type</th>
-            <th>Departs</th>
             <th>Cruise Price</th>
             <th>Flight Price</th>
             <th>Nights</th>
@@ -35,7 +34,6 @@
             <td>{{cruise.date}}</td>
             <td>{{cruise.line.name}}</td>
             <td><a href="/ships/{{cruise.ship_id}}">{{cruise.ship.name}}</td>
-            <td>{{cruise.destination}}</td>
             <td>{{cruise.departs.name}}</td>
             <td>{{cruise.price}}</td>
             <td>{{cruise.total - cruise.price}}</td>
