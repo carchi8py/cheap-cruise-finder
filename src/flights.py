@@ -42,6 +42,13 @@ def main():
             add_to_cruise(from_flight_data, cruise)
 
 def add_to_cruise(flight_data, cruise):
+    """
+    Add a Flight to an existing cruise
+
+    :param flight_data: The flight data
+    :param cruise: the cruise data
+    :return: nothing
+    """
     price = "9999"
     if flight_data != None:
         price = flight_data[0]["price"]
@@ -50,6 +57,12 @@ def add_to_cruise(flight_data, cruise):
     db.session.commit()
 
 def get_airport_code(location):
+    """
+    Get an airport code, if not return None
+
+    :param location: Get the airport code from skypicker, if more than one place has the same name, return the first one (more popular)
+    :return: The airport code, or none
+    """
     location_url = generate_location_url(location)
     r = requests.get(location_url)
     parsed_json = json.loads(r.text)
@@ -58,6 +71,12 @@ def get_airport_code(location):
     return parsed_json["locations"][0]["id"]
 
 def get_flight_details(flight_url):
+    """
+    Get the flight details
+
+    :param flight_url: The skypicker url we want to get the flight for
+    :return: The flight data, or none
+    """
     if flight_url == None:
         return None
     r = requests.get(flight_url)
@@ -69,6 +88,12 @@ def get_flight_details(flight_url):
 
 
 def generate_location_url(location):
+    """
+    Get the location URL
+
+    :param location: The location we are looking for
+    :return: the Location URL
+    """
     if ',' in location:
         location = location.split(',')[0]
     url = LOCATION_URL + location +LOCATION_URL2
@@ -76,6 +101,14 @@ def generate_location_url(location):
     return url
 
 def generate_flight_url(date_obj, from_airport, to_airport):
+    """
+    Generate the Flight url
+
+    :param date_obj: The date of the flight
+    :param from_airport: The airport the flight is leaving from
+    :param to_airport: The airport the flight is arriving at
+    :return: The url that contain the flight information, or none
+    """
     try:
         url = FLIGHT_URL1 + from_airport + FLIGHT_URL2 + to_airport + FLIGHT_URL3
         url = url + date_obj.strftime("%d/%m/%Y") + FLIGHT_URL4
