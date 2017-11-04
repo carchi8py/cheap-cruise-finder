@@ -1,10 +1,4 @@
-from bs4 import BeautifulSoup
 import requests
-import datetime
-from re import sub
-import time
-import random
-import sys
 import json
 
 from database_setup import Base, CruiseLine, Ship, Port, Cruise, Day, Flight
