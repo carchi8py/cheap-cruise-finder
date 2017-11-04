@@ -58,6 +58,8 @@ def get_airport_code(location):
     return parsed_json["locations"][0]["id"]
 
 def get_flight_details(flight_url):
+    if flight_url == None:
+        return None
     r = requests.get(flight_url)
     parsed_json = json.loads(r.text)
     if parsed_json["data"] == []:

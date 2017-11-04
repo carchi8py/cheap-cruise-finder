@@ -23,6 +23,7 @@
             <th>Type</th>
             <th>Cruise Price</th>
             <th>Flight Price</th>
+            <th>Total</th>
             <th>Nights</th>
             <th>Price Per Night</th>
         </tr>
@@ -37,6 +38,7 @@
             <td>{{cruise.departs.name}}</td>
             <td>{{cruise.price}}</td>
             <td>{{cruise.total - cruise.price}}</td>
+            <td>{{cruise.total}}</td>
             <td>{{cruise.nights}}</td>
             <td>{{cruise.total/cruise.nights}}</td>
         </tr>
