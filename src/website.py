@@ -34,7 +34,14 @@ def ports():
 @app.route('/cruises/')
 def cruise_by_price_pre_day():
     cruises = session.query(Cruise).order_by(Cruise.price/Cruise.nights)
-    return render_template('cruise.html', cruises=cruises)
+    new_cruises = []
+    for cruise in cruises:
+        total_price = cruise.price
+        for flight in cruise.flights:
+            total_price += flight.cost
+        cruise.total = total_price
+        new_cruises.append(cruise)
+    return render_template('cruise.html', cruises=new_cruises)
 
 @app.route('/days/')
 def cruise_days():

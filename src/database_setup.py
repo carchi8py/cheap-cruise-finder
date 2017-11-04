@@ -30,6 +30,13 @@ class Port(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(256), nullable=False)
 
+class Flight(Base):
+    __tablename__ = "flight"
+    id = Column(Integer, primary_key=True)
+    cruise_id = Column(Integer, ForeignKey('cruise.id'))
+    cruise = relationship("Cruise", back_populates="flights")
+    cost = Column(Integer)
+
 class Cruise(Base):
     __tablename__ = 'cruise'
     id = Column(Integer, primary_key=True)
@@ -44,6 +51,7 @@ class Cruise(Base):
     nights = Column(Integer)
     price = Column(Integer)
     days = relationship("Day", back_populates="cruise")
+    flights = relationship("Flight", back_populates="cruise")
 
 class Day(Base):
     """
