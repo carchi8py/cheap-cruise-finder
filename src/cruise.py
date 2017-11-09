@@ -15,7 +15,6 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
-#DESTINATIONS = ["21", "10", "2"]
 DESTINATIONS = ["21"]
 URL = "https://cruises.affordabletours.com/search/advanced_search"
 INFO_URL = "https://cruises.affordabletours.com/search/itsd/cruises/"
