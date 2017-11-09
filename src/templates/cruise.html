@@ -20,9 +20,10 @@
             <th>Date</th>
             <th>Cruise Line</th>
             <th>Ship</th>
-            <th>Type</th>
+            <th>Start port</th>
             <th>Cruise Price</th>
-            <th>Flight Price</th>
+            <th>Flight Price 1</th>
+            <th>Flight Price 2</th>
             <th>Total</th>
             <th>Nights</th>
             <th>Price Per Night</th>
@@ -37,7 +38,8 @@
             <td><a href="/ships/{{cruise.ship_id}}">{{cruise.ship.name}}</td>
             <td>{{cruise.departs.name}}</td>
             <td>{{cruise.price}}</td>
-            <td>{{cruise.total - cruise.price}}</td>
+            <td>{{cruise.flight1}}</td>
+            <td>{{cruise.flight2}}</td>
             <td>{{cruise.total}}</td>
             <td>{{cruise.nights}}</td>
             <td>{{cruise.total/cruise.nights}}</td>

@@ -1,0 +1,311 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>flights module &#8212; Cheap Cruise Finder 0.1 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="runme module" href="runme.html" />
+    <link rel="prev" title="db module" href="db.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="runme.html" title="runme module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="db.html" title="db module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Cheap Cruise Finder 0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-flights">
+<span id="flights-module"></span><h1>flights module<a class="headerlink" href="#module-flights" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="flights.add_to_cruise">
+<code class="descclassname">flights.</code><code class="descname">add_to_cruise</code><span class="sig-paren">(</span><em>flight_data</em>, <em>cruise</em><span class="sig-paren">)</span><a class="headerlink" href="#flights.add_to_cruise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a Flight to an existing cruise</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>flight_data</strong> – The flight data</li>
+<li><strong>cruise</strong> – the cruise data</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">nothing</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="flights.generate_flight_url">
+<code class="descclassname">flights.</code><code class="descname">generate_flight_url</code><span class="sig-paren">(</span><em>date_obj</em>, <em>from_airport</em>, <em>to_airport</em><span class="sig-paren">)</span><a class="headerlink" href="#flights.generate_flight_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate the Flight url</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>date_obj</strong> – The date of the flight</li>
+<li><strong>from_airport</strong> – The airport the flight is leaving from</li>
+<li><strong>to_airport</strong> – The airport the flight is arriving at</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The url that contain the flight information, or none</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>A single flight from the api will look like this with the following fields
+that can be used and saved in the database</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;mapIdfrom&quot;</span><span class="o">:</span> <span class="s2">&quot;las-vegas&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;duration&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;total&quot;</span><span class="o">:</span> <span class="mi">5220</span><span class="p">,</span>
+        <span class="s2">&quot;return&quot;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;departure&quot;</span><span class="o">:</span> <span class="mi">5220</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;flyTo&quot;</span><span class="o">:</span> <span class="s2">&quot;SJC&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;conversion&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;USD&quot;</span><span class="o">:</span> <span class="mi">22</span><span class="p">,</span>
+        <span class="s2">&quot;EUR&quot;</span><span class="o">:</span> <span class="mi">19</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;deep_link&quot;</span><span class="o">:</span> <span class="s2">&quot;https://www.kiwi.com/deep?from=LAS&amp;to=SJC&amp;departure=29-11-2017&amp;flightsId=332966413&amp;price=19&amp;passengers=1&amp;affilid=picky&amp;lang=en&amp;currency=USD&amp;booking_token=TjFsU9KOyjpEDqm5dNSrO5K0FG+q3rKETaHbA5WJ2yQXDnTgCWyBzCSbEggtTNtGqPQE9TDm1pkvplYzuWIbdLa3Ge63TzbPtiiWDE7WRL9ll50gaJwrQoQm3Qiny520+PbXZksFq3TMtBNSyBiWfQ/WJm0+hA7cnvs+mr6vpv7fkHQnZtNAdytvupuH0dEXy9YLI/g25CPYLN/4MUSWw5TQurbiO/Oo2L1VjG5JXVFhBqjM+TW4QS2rsBjG558+OkR6YJbeniEWnCamFvyloR/2z1lEyh+E9vPO3maOdZYhX/gElVWz8IFvETDe43KNq7lUWI07WS0VILHuFrvA7OBMkbamBGF6ST4siC/7zo+INq1m0cv1IIJYuqTfTI2UJnbmU5lmthSzsLsAqui/lkBY7B3X3L8iFk+Ih9a+dgNxYN/UZxbd2AYW02u3zjReO5oIhAFWfbhNF2SaVEwbWQIS1XE9bD59lOfcu2Xa8UB5Ggh7JIgRnaaptXHExQeNGLsOXxzFvP2vZJ4ES/JbsfdihyX5zNqb+K+hEqs1N8xz/oSN2EUiPiYYcLQdPq3mkc44u/YgSRK7/QxFT5Gbx7VM8xY4E2F+b5A6D3Z+LjA=&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;mapIdto&quot;</span><span class="o">:</span> <span class="s2">&quot;san-francisco&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;nightsInDest&quot;</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="s2">&quot;airlines&quot;</span><span class="o">:</span> <span class="p">[</span>
+    <span class="s2">&quot;F9&quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;332966413&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;facilitated_booking_available&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">&quot;pnr_count&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;fly_duration&quot;</span><span class="o">:</span> <span class="s2">&quot;1h 27m&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;countryTo&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;code&quot;</span><span class="o">:</span> <span class="s2">&quot;US&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;United States&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;baglimit&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;hand_width&quot;</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="s2">&quot;hand_length&quot;</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="s2">&quot;hold_weight&quot;</span><span class="o">:</span> <span class="mi">22</span><span class="p">,</span>
+        <span class="s2">&quot;hand_height&quot;</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="s2">&quot;hand_weight&quot;</span><span class="o">:</span> <span class="kc">null</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;aTimeUTC&quot;</span><span class="o">:</span> <span class="mi">1511989320</span><span class="p">,</span>
+    <span class="s2">&quot;p3&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;price&quot;</span><span class="o">:</span> <span class="mi">22</span><span class="p">,</span>
+    <span class="s2">&quot;type_flights&quot;</span><span class="o">:</span> <span class="p">[</span>
+    <span class="s2">&quot;lcc&quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;bags_price&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;1&quot;</span><span class="o">:</span> <span class="mi">28</span><span class="p">,</span>
+        <span class="s2">&quot;2&quot;</span><span class="o">:</span> <span class="mi">65</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;cityTo&quot;</span><span class="o">:</span> <span class="s2">&quot;San Jose&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;transfers&quot;</span><span class="o">:</span> <span class="p">[],</span>
+    <span class="s2">&quot;flyFrom&quot;</span><span class="o">:</span> <span class="s2">&quot;LAS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;dTimeUTC&quot;</span><span class="o">:</span> <span class="mi">1511984100</span><span class="p">,</span>
+    <span class="s2">&quot;p2&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;countryFrom&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;code&quot;</span><span class="o">:</span> <span class="s2">&quot;US&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;United States&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;p1&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;dTime&quot;</span><span class="o">:</span> <span class="mi">1511955300</span><span class="p">,</span>
+    <span class="s2">&quot;found_on&quot;</span><span class="o">:</span> <span class="p">[</span>
+    <span class="s2">&quot;deprecated&quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;booking_token&quot;</span><span class="o">:</span> <span class="s2">&quot;TjFsU9KOyjpEDqm5dNSrO5K0FG+q3rKETaHbA5WJ2yQXDnTgCWyBzCSbEggtTNtGqPQE9TDm1pkvplYzuWIbdLa3Ge63TzbPtiiWDE7WRL9ll50gaJwrQoQm3Qiny520+PbXZksFq3TMtBNSyBiWfQ/WJm0+hA7cnvs+mr6vpv7fkHQnZtNAdytvupuH0dEXy9YLI/g25CPYLN/4MUSWw5TQurbiO/Oo2L1VjG5JXVFhBqjM+TW4QS2rsBjG558+OkR6YJbeniEWnCamFvyloR/2z1lEyh+E9vPO3maOdZYhX/gElVWz8IFvETDe43KNq7lUWI07WS0VILHuFrvA7OBMkbamBGF6ST4siC/7zo+INq1m0cv1IIJYuqTfTI2UJnbmU5lmthSzsLsAqui/lkBY7B3X3L8iFk+Ih9a+dgNxYN/UZxbd2AYW02u3zjReO5oIhAFWfbhNF2SaVEwbWQIS1XE9bD59lOfcu2Xa8UB5Ggh7JIgRnaaptXHExQeNGLsOXxzFvP2vZJ4ES/JbsfdihyX5zNqb+K+hEqs1N8xz/oSN2EUiPiYYcLQdPq3mkc44u/YgSRK7/QxFT5Gbx7VM8xY4E2F+b5A6D3Z+LjA=&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;routes&quot;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">[</span>
+            <span class="s2">&quot;LAS&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;SJC&quot;</span>
+        <span class="p">]</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;cityFrom&quot;</span><span class="o">:</span> <span class="s2">&quot;Las Vegas&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aTime&quot;</span><span class="o">:</span> <span class="mi">1511960520</span><span class="p">,</span>
+    <span class="s2">&quot;route&quot;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;bags_recheck_required&quot;</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="s2">&quot;mapIdfrom&quot;</span><span class="o">:</span> <span class="s2">&quot;las-vegas&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;flight_no&quot;</span><span class="o">:</span> <span class="mi">1127</span><span class="p">,</span>
+            <span class="s2">&quot;original_return&quot;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;lngFrom&quot;</span><span class="o">:</span> <span class="o">-</span><span class="mf">115.172789096832</span><span class="p">,</span>
+            <span class="s2">&quot;flyTo&quot;</span><span class="o">:</span> <span class="s2">&quot;SJC&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;guarantee&quot;</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="s2">&quot;latTo&quot;</span><span class="o">:</span> <span class="mf">37.3625984</span><span class="p">,</span>
+            <span class="s2">&quot;source&quot;</span><span class="o">:</span> <span class="s2">&quot;deprecated&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;combination_id&quot;</span><span class="o">:</span> <span class="s2">&quot;332966413&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;332966413&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;latFrom&quot;</span><span class="o">:</span> <span class="mf">36.1146658358667</span><span class="p">,</span>
+            <span class="s2">&quot;lngTo&quot;</span><span class="o">:</span> <span class="o">-</span><span class="mf">121.9290009</span><span class="p">,</span>
+            <span class="s2">&quot;dTimeUTC&quot;</span><span class="o">:</span> <span class="mi">1511984100</span><span class="p">,</span>
+            <span class="s2">&quot;aTimeUTC&quot;</span><span class="o">:</span> <span class="mi">1511989320</span><span class="p">,</span>
+            <span class="s2">&quot;return&quot;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;price&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;cityTo&quot;</span><span class="o">:</span> <span class="s2">&quot;San Jose&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;flyFrom&quot;</span><span class="o">:</span> <span class="s2">&quot;LAS&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;mapIdto&quot;</span><span class="o">:</span> <span class="s2">&quot;san-francisco&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;dTime&quot;</span><span class="o">:</span> <span class="mi">1511955300</span><span class="p">,</span>
+            <span class="s2">&quot;found_on&quot;</span><span class="o">:</span> <span class="s2">&quot;deprecated&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;airline&quot;</span><span class="o">:</span> <span class="s2">&quot;F9&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;cityFrom&quot;</span><span class="o">:</span> <span class="s2">&quot;Las Vegas&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;aTime&quot;</span><span class="o">:</span> <span class="mi">1511960520</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;distance&quot;</span><span class="o">:</span> <span class="mf">618.35</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="flights.generate_location_url">
+<code class="descclassname">flights.</code><code class="descname">generate_location_url</code><span class="sig-paren">(</span><em>location</em><span class="sig-paren">)</span><a class="headerlink" href="#flights.generate_location_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the location URL</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>location</strong> – The location we are looking for</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the Location URL</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="flights.get_airport_code">
+<code class="descclassname">flights.</code><code class="descname">get_airport_code</code><span class="sig-paren">(</span><em>location</em><span class="sig-paren">)</span><a class="headerlink" href="#flights.get_airport_code" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get an airport code, if not return None</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>location</strong> – Get the airport code from skypicker, if more than one place has the same name, return the first one (more popular)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The airport code, or none</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="flights.get_flight_details">
+<code class="descclassname">flights.</code><code class="descname">get_flight_details</code><span class="sig-paren">(</span><em>flight_url</em><span class="sig-paren">)</span><a class="headerlink" href="#flights.get_flight_details" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the flight details</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>flight_url</strong> – The skypicker url we want to get the flight for</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The flight data, or none</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="flights.main">
+<code class="descclassname">flights.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#flights.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="db.html"
+                        title="previous chapter">db module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="runme.html"
+                        title="next chapter">runme module</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/flights.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="runme.html" title="runme module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="db.html" title="db module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Cheap Cruise Finder 0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Chris Archibald.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.4.
+    </div>
+  </body>
+</html>

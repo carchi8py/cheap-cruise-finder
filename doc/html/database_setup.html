@@ -1,33 +1,32 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>database_setup module &#8212; Cheap Cruise Finder 0.1 documentation</title>
-    
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
         VERSION:     '0.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Cheap Cruise Finder 0.1 documentation" href="index.html" />
-    <link rel="next" title="website module" href="website.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="db module" href="db.html" />
     <link rel="prev" title="cruise module" href="cruise.html" /> 
   </head>
-  <body role="document">
+  <body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -38,7 +37,7 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="website.html" title="website module"
+          <a href="db.html" title="db module"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="cruise.html" title="cruise module"
@@ -81,6 +80,11 @@
 <dl class="attribute">
 <dt id="database_setup.Cruise.destination">
 <code class="descname">destination</code><a class="headerlink" href="#database_setup.Cruise.destination" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="database_setup.Cruise.flights">
+<code class="descname">flights</code><a class="headerlink" href="#database_setup.Cruise.flights" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -194,6 +198,32 @@
 </dd></dl>
 
 <dl class="class">
+<dt id="database_setup.Flight">
+<em class="property">class </em><code class="descclassname">database_setup.</code><code class="descname">Flight</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#database_setup.Flight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sqlalchemy.ext.declarative.api.Base</span></code></p>
+<dl class="attribute">
+<dt id="database_setup.Flight.cost">
+<code class="descname">cost</code><a class="headerlink" href="#database_setup.Flight.cost" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="database_setup.Flight.cruise">
+<code class="descname">cruise</code><a class="headerlink" href="#database_setup.Flight.cruise" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="database_setup.Flight.cruise_id">
+<code class="descname">cruise_id</code><a class="headerlink" href="#database_setup.Flight.cruise_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="database_setup.Flight.id">
+<code class="descname">id</code><a class="headerlink" href="#database_setup.Flight.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="database_setup.Port">
 <em class="property">class </em><code class="descclassname">database_setup.</code><code class="descname">Port</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#database_setup.Port" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sqlalchemy.ext.declarative.api.Base</span></code></p>
@@ -282,12 +312,12 @@
   <p class="topless"><a href="cruise.html"
                         title="previous chapter">cruise module</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="website.html"
-                        title="next chapter">website module</a></p>
+  <p class="topless"><a href="db.html"
+                        title="next chapter">db module</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/database_setup.txt"
+      <li><a href="_sources/database_setup.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -315,7 +345,7 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="website.html" title="website module"
+          <a href="db.html" title="db module"
              >next</a> |</li>
         <li class="right" >
           <a href="cruise.html" title="cruise module"
@@ -325,7 +355,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Chris Archibald.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.4.
     </div>
   </body>
 </html>

@@ -6,4 +6,8 @@ src
 
    cruise
    database_setup
+   db
+   flights
+   runme
+   ships
    website

@@ -40,6 +40,15 @@ def cruise_by_price_pre_day():
         for flight in cruise.flights:
             total_price += flight.cost
         cruise.total = total_price
+        if len(cruise.flights) == 0:
+            cruise.flight1 = "N/A"
+            cruise.flight2 = "N/A"
+        elif len(cruise.flights) == 1:
+            cruise.flight1 = cruise.flights[0].cost
+            cruise.flight2 = "N/A"
+        else:
+            cruise.flight1 = cruise.flights[0].cost
+            cruise.flight2 = cruise.flights[1].cost
         new_cruises.append(cruise)
     return render_template('cruise.html', cruises=new_cruises)
 
