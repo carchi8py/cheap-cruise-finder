@@ -103,8 +103,11 @@ def generate_flight_url(date_obj, from_airport, to_airport):
     :param to_airport: The airport the flight is arriving at
     :return: The url that contain the flight information, or none
 
+    A single flight from the api will look like this with the following fields
+    that can be used and saved in the database
+
     .. code-block:: json
-    
+
     {
         "mapIdfrom": "las-vegas",
         "duration": {
