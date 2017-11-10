@@ -5,6 +5,7 @@ from re import sub
 import sys
 import time
 import random
+import argparse
 
 from sqlalchemy import create_engine, exists
 from sqlalchemy.orm import sessionmaker
@@ -15,30 +16,28 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
-DESTINATIONS = ["21"]
 URL = "https://cruises.affordabletours.com/search/advanced_search"
 INFO_URL = "https://cruises.affordabletours.com/search/itsd/cruises/"
 
-def main():
-    for destination in DESTINATIONS:
-        works = True
-        i = 1
-        params = {"destination": destination}
-        while works:
-            try:
-                cruises = find_search_results(i, params)
-            except:
-                works = False
-                continue
-            # the first cruise row is the header of the table, which we don't care about so we will skip them
-            for cruise in cruises[1:]:
-                cruise_data = get_cruise_data(cruise)
-                add_to_db(cruise_data)
-                itinerary = get_crusie_info(cruise_data[7])
-                parse_days(itinerary, cruise_data[7])
-                #So we do hit the site to hard let wait some where between 1 and 20 seconds
-                #time.sleep(random.randint(1,10))
-            i+=1
+def main(destination):
+    works = True
+    i = 1
+    params = {"destination": destination}
+    while works:
+        try:
+            cruises = find_search_results(i, params)
+        except:
+            works = False
+            continue
+        # the first cruise row is the header of the table, which we don't care about so we will skip them
+        for cruise in cruises[1:]:
+            cruise_data = get_cruise_data(cruise)
+            add_to_db(cruise_data)
+            itinerary = get_crusie_info(cruise_data[7])
+            parse_days(itinerary, cruise_data[7])
+            #So we do hit the site to hard let wait some where between 1 and 20 seconds
+            #time.sleep(random.randint(1,10))
+        i+=1
 
 def add_to_db(cruise_data):
     """
@@ -275,4 +274,5 @@ def get_crusie_info(cruise_id):
 
 
 if __name__ == "__main__":
-    main()
+    main("21")
+
