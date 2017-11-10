@@ -13,10 +13,7 @@ FLIGHT_URL3 = "&dateFrom="
 FLIGHT_URL4 = "&dateTo="
 FLIGHT_URL5 = "&one_per_date=1&curr=USD"
 
-TEST_AIRPORT = "SFO"
-
-
-def main():
+def main(location):
     cruises = db.session.query(Cruise).order_by(Cruise.nights).all()
     for cruise in cruises:
         to_flight = None
@@ -26,12 +23,12 @@ def main():
         days = cruise.days
         end_airport = get_airport_code(days[len(days) -1 ].port.name)
         end_date = days[len(days) -1 ].date
-        if TEST_AIRPORT != start_airport:
-            to_flight = generate_flight_url(start_date, TEST_AIRPORT, start_airport)
+        if location != start_airport:
+            to_flight = generate_flight_url(start_date, location, start_airport)
             to_flight_data = get_flight_details(to_flight)
             add_to_cruise(to_flight_data, cruise)
-        if TEST_AIRPORT != end_airport:
-            from_flight = generate_flight_url(end_date, end_airport, TEST_AIRPORT)
+        if location != end_airport:
+            from_flight = generate_flight_url(end_date, end_airport, location)
             from_flight_data = get_flight_details(from_flight)
             add_to_cruise(from_flight_data, cruise)
 
@@ -217,4 +214,4 @@ def generate_flight_url(date_obj, from_airport, to_airport):
     return url
 
 if __name__ == "__main__":
-    main()
+    main("SFO")

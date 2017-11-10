@@ -52,12 +52,14 @@ def main(argv):
     options = _parse_options(argv)
     cruise.main(options.cruise)
     ships.main()
-    flights.main()
+    flights.main(options.location)
 
 def _parse_options(argv):
     parser = argparse.ArgumentParser(argv, formatter_class=argparse.RawTextHelpFormatter)
     parser.add_argument("-c", "--cruise", dest="cruise", default="21",
                         help = CRUISE_HELP)
+    parser.add_argument("-l", "--location", dest="location", default="San Francisco",
+                        help = "String contains the location you need fights from. Example: 'San Francisco'")
     return parser.parse_args()
 
 if __name__ == "__main__":
