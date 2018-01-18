@@ -11,7 +11,8 @@ $WORKSPACE/make_coverage.sh'''
         }
         stage('Static analysis') {
           steps {
-            sh 'find . -iname "*.py" | xargs pylint -r n --msg-template="{path}:{line}: [{msg_id}({symbol}), {obj}] {msg}" > report.bat'
+            sh '''export PATH="/usr/local/bin:$PATH"
+find . -iname "*.py" | xargs pylint -r n --msg-template="{path}:{line}: [{msg_id}({symbol}), {obj}] {msg}" > report.bat'''
           }
         }
       }
