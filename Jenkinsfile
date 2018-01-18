@@ -3,7 +3,8 @@ pipeline {
   stages {
     stage('Coverage') {
       steps {
-        sh '$WORKSPACE/make_coverage.sh'
+        sh '''echo $PATH
+$WORKSPACE/make_coverage.sh'''
       }
     }
   }
