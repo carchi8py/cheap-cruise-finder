@@ -20,7 +20,7 @@ $WORKSPACE/make_coverage.sh'''
     }
     stage('SonarQube analysis') {
       steps {
-        echo 'hi'
+        sh '/Users/chrisarchibald/Desktop/SonarTestInstances/sonar-scanner-3.0.3.778-macosx 2/bin/sonar-scanner'
       }
     }
   }
