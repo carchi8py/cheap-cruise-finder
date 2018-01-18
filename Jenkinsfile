@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Coverage') {
       steps {
-        sh '''echo $PATH
+        sh '''export PATH="/usr/local/bin:$PATH"
 $WORKSPACE/make_coverage.sh'''
       }
     }
