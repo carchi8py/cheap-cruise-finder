@@ -18,5 +18,10 @@ $WORKSPACE/make_coverage.sh'''
         }
       }
     }
+    stage('SonarQube analysis') {
+      steps {
+        echo 'hi'
+      }
+    }
   }
 }
