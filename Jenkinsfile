@@ -1,7 +1,7 @@
 pipeline {
   agent any
   stages {
-    stage('Coverage') {
+    stage('Coverage section') {
       parallel {
         stage('Coverage') {
           steps {
